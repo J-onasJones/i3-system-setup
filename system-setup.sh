@@ -54,11 +54,11 @@ systemctl enable ly.service
 
 # install all pacman packages
 echo "\nInstalling pacman packages...\n"
-yay -S --noconfirm --needed neofetch steam discord deja-dup btop ulseaudio-alsa pulseaudio-bluetooth gparted krita syncthing tmux dolphin gnome-keyring cpupower-gui arduino nbtexplorer obs-studio gpick audacity kdenlive libreoffice thunderbird signal-desktop speedtest wine tmux flameshot alactritty
+yay -S --noconfirm --needed neofetch steam discord deja-dup btop ulseaudio-alsa pulseaudio-bluetooth gparted krita syncthing tmux dolphin gnome-keyring cpupower-gui arduino nbtexplorer obs-studio gpick audacity kdenlive libreoffice thunderbird signal-desktop speedtest wine tmux flameshot alactritty lutris unrar kdiskmark kdeconnect spotifyd
 
 # install all AUR packages
 echo "\nInstalling AUR packages...\n"
-yay -S --noconfirm --needed aseprite browsh-bin protonvpn protonvpn-cli protonvpn-gui python-proton-client qjoypad realvnc-vnc-viewer spotify stacer visual-studio-code github-desktop-bin polymc atlauncher whatsapp-for-linux librepcb rpi-imager jetbrains-toolbox unityhub protonvpn ungoogled-chromium icon-library
+yay -S --noconfirm --needed aseprite browsh-bin protonvpn protonvpn-cli protonvpn-gui python-proton-client qjoypad realvnc-vnc-viewer spotify stacer visual-studio-code github-desktop-bin polymc atlauncher whatsapp-for-linux librepcb rpi-imager jetbrains-toolbox unityhub protonvpn ungoogled-chromium icon-library spotify-tui
 
 
 
@@ -131,6 +131,13 @@ SUBSYSTEM=="usb", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="0080", TAG+="uacce
 ENDOFFILE
 udevadm trigger
 sudo -u $user pip3 install streamdeck-ui --user
+
+# fetch saved config files from repository
+echo "fetching config file from repository..."
+
+
+
+
 
 
 # get end time
