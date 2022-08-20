@@ -26,14 +26,6 @@ yay -Syu
 echo "\nInstalling emojis...\n"
 yay -S --noconfirm --needed noto-fonts-emoji
 
-# install z4h
-echo "\nInstalling z4h...\n"
-if command -v curl >/dev/null 2>&1; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
-else
-  sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
-fi
-
 # install blueman, bluez
 echo "\nInstalling Bluetooth dependencies...\n"
 yay -S --noconfirm --needed blueman bluez bluez-utils-compat
@@ -53,12 +45,12 @@ systemctl disable lightdm.service
 systemctl enable ly.service
 
 # install all pacman packages
-echo "\nInstalling pacman packages...\n"
-yay -S --noconfirm --needed neofetch steam discord deja-dup btop ulseaudio-alsa pulseaudio-bluetooth gparted krita syncthing tmux dolphin gnome-keyring cpupower-gui arduino nbtexplorer obs-studio gpick audacity kdenlive libreoffice thunderbird signal-desktop speedtest wine tmux flameshot alactritty lutris unrar kdiskmark kdeconnect spotifyd
+echo "\nInstalling misc pacman packages...\n"
+yay -S --noconfirm --needed neofetch steam discord deja-dup btop ulseaudio-alsa pulseaudio-bluetooth gparted krita syncthing tmux dolphin gnome-keyring cpupower-gui arduino nbtexplorer obs-studio gpick audacity kdenlive libreoffice thunderbird signal-desktop speedtest wine tmux flameshot alactritty lutris unrar kdiskmark kdeconnect
 
 # install all AUR packages
-echo "\nInstalling AUR packages...\n"
-yay -S --noconfirm --needed aseprite browsh-bin protonvpn protonvpn-cli protonvpn-gui python-proton-client qjoypad realvnc-vnc-viewer spotify stacer visual-studio-code github-desktop-bin polymc atlauncher whatsapp-for-linux librepcb rpi-imager jetbrains-toolbox unityhub protonvpn ungoogled-chromium icon-library spotify-tui
+echo "\nInstalling misc AUR packages...\n"
+yay -S --noconfirm --needed aseprite browsh-bin protonvpn protonvpn-cli protonvpn-gui python-proton-client qjoypad realvnc-vnc-viewer spotify stacer visual-studio-code github-desktop-bin polymc atlauncher whatsapp-for-linux librepcb rpi-imager jetbrains-toolbox unityhub protonvpn ungoogled-chromium icon-library
 
 
 
@@ -75,6 +67,60 @@ curl -s https://api.github.com/repos/GooseMod/OpenAsar/releases/latest \
 # install latest OpenAsar
 echo "\nInstalling latest OpenAsar...\n"
 mv app.asar /opt/discord/resources/app.asar
+
+########## spotifyd - spotify-tui ##########
+yay -s --noconfirm --needed spotifyd spotify-tui
+mkdir ~/-config/spotifyd
+cat > ~/.config/spotifyd/spotifyd.conf << ENDOFFILE
+[global]
+# Your Spotify account name.
+username = "b21o8x094vvc7alc9rwpw0gc2"
+
+# Your Spotify account password.
+password = "Friebele068"
+# backend
+backend = "pulseaudio"
+volume_controller = "alsa"
+
+# The device name can't have spaces. The device type has only cosmetic changes.
+device_name = "hp-g3-j-sptd"
+device_type = "computer"
+
+bitrate = 320
+
+# create the directory. I chose not to keep a cache, but you might.
+cache_path = "/home/jonas_jones/.cache/spotifyd"
+no_audio_cache = true
+
+# Disabling normalisation works better for me
+# And for some reason, on my machine "0" corresponds to 38%
+initial_volume = "0"
+volume_normalisation = false
+normalisation_pregain = -10
+
+zeroconf_port = 4444
+ENDOFFILE
+
+cat ~/.config/systemd/user/spotifyd.service << ENDOFFILE
+[Unit]
+Description=A spotify playing daemon
+Documentation=https://github.com/Spotifyd/spotifyd
+Wants=sound.target
+After=sound.target
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/spotifyd --no-daemon
+Restart=always
+RestartSec=12
+
+[Install]
+WantedBy=default.target
+ENDOFFILE
+
+systemctl start --user spotifyd.service
+systemctl restart --user spotifyd.service
 
 
 ########## no-beep.service ##########
@@ -148,3 +194,15 @@ echo "script finished in $((end_time - start_time)) seconds"
 neofetch
 echo "System setup complete!"
 echo "Reboot recommended!"
+echo "\nPress ENTER to start the last manual setup for the installed packages"
+read -n 1 k <&1
+
+# install z4h
+echo "\nInstalling z4h...\n"
+if command -v curl >/dev/null 2>&1; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
+else
+  sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
+fi
+# setup spotify-tui
+spt
