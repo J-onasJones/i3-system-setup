@@ -46,7 +46,7 @@ systemctl enable ly.service
 
 # install all pacman packages
 echo "\nInstalling misc pacman packages...\n"
-yay -S --noconfirm --needed neofetch steam discord deja-dup btop ulseaudio-alsa pulseaudio-bluetooth gparted krita syncthing tmux dolphin gnome-keyring cpupower-gui arduino nbtexplorer obs-studio gpick audacity kdenlive libreoffice thunderbird signal-desktop speedtest wine tmux flameshot alactritty lutris unrar kdiskmark kdeconnect
+yay -S --noconfirm --needed neofetch steam discord deja-dup btop ulseaudio-alsa pulseaudio-bluetooth gparted krita syncthing tmux dolphin gnome-keyring cpupower-gui arduino nbtexplorer obs-studio gpick audacity kdenlive libreoffice thunderbird signal-desktop speedtest wine tmux flameshot alactritty lutris unrar kdiskmark kdeconnect bitwarden
 
 # install all AUR packages
 echo "\nInstalling misc AUR packages...\n"
