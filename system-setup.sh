@@ -50,7 +50,7 @@ yay -S --noconfirm --needed neofetch steam discord deja-dup btop ulseaudio-alsa 
 
 # install all AUR packages
 echo "\nInstalling misc AUR packages...\n"
-yay -S --noconfirm --needed aseprite browsh-bin protonvpn protonvpn-cli protonvpn-gui python-proton-client qjoypad realvnc-vnc-viewer spotify stacer visual-studio-code github-desktop-bin polymc atlauncher whatsapp-for-linux librepcb rpi-imager jetbrains-toolbox unityhub protonvpn ungoogled-chromium icon-library librepcb diylc
+yay -S --noconfirm --needed aseprite browsh-bin protonvpn protonvpn-cli protonvpn-gui python-proton-client qjoypad realvnc-vnc-viewer spotify stacer visual-studio-code github-desktop-bin polymc atlauncher whatsapp-for-linux librepcb rpi-imager jetbrains-toolbox unityhub protonvpn ungoogled-chromium icon-library librepcb diylc skypeforlinux-stable-bin
 
 
 
