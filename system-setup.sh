@@ -184,6 +184,13 @@ echo "fetching config file from repository..."
 
 
 
+# install lci - lolcode interpreter
+git clone https://github.com/justinmeza/lci.git /tmp/lci
+cd /tmp/lci
+cmake .
+make
+make install
+ctest
 
 
 # get end time
