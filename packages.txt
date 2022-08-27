@@ -124,11 +124,6 @@ tldr
 sed
 vi
 wget
-
-
-
-
-
 acpi
 arandr
 arc-gtk-theme-eos
@@ -169,3 +164,4 @@ xdg-user-dirs-gtk
 xed
 xorg-xbacklight
 xorg-xdpyinfo
+firefox
