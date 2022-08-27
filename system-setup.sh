@@ -20,7 +20,11 @@ user=$array[2]
 
 # update the system packages
 echo "\nUpdating system packages...\n"
-yay -Syu
+yay -Syyu --noconfirm
+
+# remove packages that cause conflicts
+yay -Rns --noconfirm pipewire-pulse
+yay -Rns --noconfirm bluez-utils
 
 # install emojis necessary for z4h
 echo "\nInstalling emojis...\n"
@@ -46,11 +50,11 @@ systemctl enable ly.service
 
 # install all pacman packages
 echo "\nInstalling misc pacman packages...\n"
-yay -S --noconfirm --needed neofetch steam discord deja-dup btop ulseaudio-alsa pulseaudio-bluetooth gparted krita syncthing tmux dolphin gnome-keyring cpupower-gui arduino nbtexplorer obs-studio gpick audacity kdenlive libreoffice thunderbird signal-desktop speedtest wine tmux flameshot alactritty lutris unrar kdiskmark kdeconnect bitwarden
+yay -S --noconfirm --needed neofetch steam discord deja-dup btop pulseaudio-alsa pulseaudio-bluetooth gparted krita syncthing tmux dolphin gnome-keyring cpupower-gui arduino nbtexplorer obs-studio gpick audacity kdenlive libreoffice thunderbird signal-desktop speedtest-cli wine tmux flameshot alacritty lutris unrar kdiskmark kdeconnect bitwarden
 
 # install all AUR packages
 echo "\nInstalling misc AUR packages...\n"
-yay -S --noconfirm --needed aseprite browsh-bin protonvpn protonvpn-cli protonvpn-gui python-proton-client qjoypad realvnc-vnc-viewer spotify stacer visual-studio-code github-desktop-bin polymc atlauncher whatsapp-for-linux librepcb rpi-imager jetbrains-toolbox unityhub protonvpn ungoogled-chromium icon-library librepcb diylc skypeforlinux-stable-bin
+su -c yay -S --noconfirm --needed aseprite browsh-bin protonvpn protonvpn-cli protonvpn-gui python-proton-client qjoypad realvnc-vnc-viewer spotify stacer visual-studio-code-bin github-desktop-bin polymc atlauncher whatsapp-for-linux librepcb rpi-imager jetbrains-toolbox unityhub protonvpn ungoogled-chromium icon-library librepcb diylc skypeforlinux-stable-bin $user
 
 
 
@@ -159,14 +163,14 @@ echo "Reboot to complete installation of VirtualBox"
 # install sublime text 3
 curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
 echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
-pacman -Syu sublime-text
+pacman -Syu --noconfirm sublime-text
 
 # install intel drivers
 echo "\nInstalling intel drivers...\n"
 yay -S --noconfirm --needed mesa lib32-mesa xf86-video-intel vulkan-intel intel-hybrid-codec-driver linux-firmware intel-media-driver
 
 # install streamdeck-ui
-yay -Syyu python-pip hidapi libxcb
+yay -S --noconfirm python-pip hidapi libxcb
 touch /etc/udev/rules.d/70-streamdeck.rules
 cat /etc/udev/rules.d/70-streamdeck.rules << ENDOFFILE
 SUBSYSTEM=="usb", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="0060", TAG+="uaccess"
@@ -207,9 +211,9 @@ read -n 1 k <&1
 # install z4h
 echo "\nInstalling z4h...\n"
 if command -v curl >/dev/null 2>&1; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
+ su -c  sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)" $user
 else
-  sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
+  su -c sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)" $user
 fi
 # setup spotify-tui
 spt
