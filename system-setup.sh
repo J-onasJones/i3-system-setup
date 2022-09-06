@@ -78,10 +78,10 @@ mkdir ~/-config/spotifyd
 cat > ~/.config/spotifyd/spotifyd.conf << ENDOFFILE
 [global]
 # Your Spotify account name.
-username = "b21o8x094vvc7alc9rwpw0gc2"
+username = "[username]"
 
 # Your Spotify account password.
-password = "Friebele068"
+password = "[password]"
 # backend
 backend = "pulseaudio"
 volume_controller = "alsa"
